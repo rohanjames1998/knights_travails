@@ -6,7 +6,7 @@ module Board_functions
       col = []
       until col.length == 8
         sq = Square.new
-        col << sq.val
+        col << sq
       end
       row << col
     end
@@ -16,44 +16,36 @@ module Board_functions
     # This method takes a 2d array of 8x8 and adds adjacent squares for each square
     # (i.e the elements of the array).
     def add_adjacent_squares(board)
-      board.each_with_index do |row, index|
-        r_index = index
+      board.each_with_index do |row, r_index|
         row.each_with_index do |sq, index|
           # For each square on the board we check if there is a square above it,
           # after it, below it or before it. If there is one we add that as its
           # adjacent square.
-          case
-          when board[r_index - 1] != nil
-            sq.adjacent_squares << board[r_index - 1[index]].val
-          when row[i + 1] != nil
-            sq.adjacent_squares << row[i + 1].val
-          when board[r_index + 1] != nil
-            sq.adjacent_squares << board[r_index + 1[index]].val
-          when row[index - 1] != nil
-            sq.adjacent_squares << row[index - 1].val
+          if r_index >= 1
+            sq.adjacent_squares << board[r_index - 1][index]
+          end
+          if row[index + 1]
+            sq.adjacent_squares << row[index + 1]
+          end
+          if board[r_index + 1]
+            sq.adjacent_squares << board[r_index + 1][index]
+          end
+          if row[index - 1]
+            sq.adjacent_squares << row[index - 1]
           end
         end
       end
     end
   end
 
-
-
-
-
-
-
-
-
 class Square
   # A square is a single position on the chess board where knight can be placed.
   # Since we don't want to store anything in these squares it just has one
   # property - adjacent squares.
 
-  attr_accessor :adjacent_squares, :val
+  attr_accessor :adjacent_squares
 
   def initialize
-    @val = 'x'
     @adjacent_squares = []
   end
 end
@@ -73,5 +65,3 @@ class Board
   end
 end
 
-b = Board.new
-puts b[0,0].adjacent_squares
