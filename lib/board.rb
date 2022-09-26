@@ -1,4 +1,19 @@
+module Board_functions
 
+  def add_sq_to_board
+    row = []
+    until row.length == 8
+      col = []
+      until col.length == 8
+        sq = Square.new
+        col << sq
+      end
+      row << col
+    end
+
+    # This method takes a 2d array of 8x8 and adds adjacent squares for each square
+    # (i.e the elements of the array).
+    # def add_adjacent_squares(board)
 
 
 
