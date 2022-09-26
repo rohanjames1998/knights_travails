@@ -6,15 +6,17 @@ module Board_functions
       col = []
       until col.length == 8
         sq = Square.new
-        col << sq
+        col << sq.val
       end
       row << col
     end
+    row
+  end
 
     # This method takes a 2d array of 8x8 and adds adjacent squares for each square
     # (i.e the elements of the array).
     # def add_adjacent_squares(board)
-
+  end
 
 
 
@@ -29,7 +31,7 @@ class Square
   # Since we don't want to store anything in these squares it just has one
   # property - adjacent squares.
 
-  attr_accessor :adjacent_squares
+  attr_accessor :adjacent_squares, :val
 
   def initialize
     @adjacent_squares = []
@@ -43,8 +45,11 @@ class Board
 
   include Board_functions
 
+  attr_reader :board
+
   def initialize
-    @board = add_squares_to_board
+    @board = add_sq_to_board
     add_adjacent_squares(board)
   end
 end
+
