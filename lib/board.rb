@@ -15,7 +15,26 @@ module Board_functions
 
     # This method takes a 2d array of 8x8 and adds adjacent squares for each square
     # (i.e the elements of the array).
-    # def add_adjacent_squares(board)
+    def add_adjacent_squares(board)
+      board.each_with_index do |row, index|
+        r_index = index
+        row.each_with_index do |sq, index|
+          # For each square on the board we check if there is a square above it,
+          # after it, below it or before it. If there is one we add that as its
+          # adjacent square.
+          case
+          when board[r_index - 1] != nil
+            sq.adjacent_squares << board[r_index - 1[index]].val
+          when row[i + 1] != nil
+            sq.adjacent_squares << row[i + 1].val
+          when board[r_index + 1] != nil
+            sq.adjacent_squares << board[r_index + 1[index]].val
+          when row[index - 1] != nil
+            sq.adjacent_squares << row[index - 1].val
+          end
+        end
+      end
+    end
   end
 
 
@@ -34,6 +53,7 @@ class Square
   attr_accessor :adjacent_squares, :val
 
   def initialize
+    @val = 'x'
     @adjacent_squares = []
   end
 end
@@ -53,3 +73,5 @@ class Board
   end
 end
 
+b = Board.new
+puts b[0,0].adjacent_squares
