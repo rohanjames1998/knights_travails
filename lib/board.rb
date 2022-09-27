@@ -25,42 +25,37 @@ module Board_functions
         row.each_with_index do |sq, index|
           # For each square we first check if we can move above/below/right/left of the square.(the two steps)
           # If we can then we check once more if we can move right/left from that position.(the half steps).
-          if board[r_index + 2]
             # Checking if we can move above.
-            if board[r_index + 2][index + 1]
-            sq.possible_moves << board[r_index + 2][index + 1].position
+            if board[r_index + 2] && board[r_index + 2][index + 1]
+              sq.possible_moves << board[r_index + 2][index + 1]
             end
-            if board[r_index + 2][index - 1]
-            sq.possible_moves << board[r_index + 2][index - 1].position
+            if board[r_index + 2] && board[r_index + 2][index - 1] && index - 1 >= 0
+              sq.possible_moves << board[r_index + 2][index - 1]
             end
-          end
-          if row[index + 2]
             # Checking if we can move right.
             if board[r_index + 1] && board[r_index + 1][index + 2]
-            sq.possible_moves << board[r_index + 1][index + 2].position
+              sq.possible_moves << board[r_index + 1][index + 2]
             end
-            if board[r_index - 1] && board[r_index - 1][index + 2]
-              sq.possible_moves << board[r_index - 1][index + 2].position
+            # When we subtract index number we have to check if we don't accidentally check for
+            # the last index as index can be negative. Hence the third statement
+            if board[r_index - 1] && board[r_index - 1][index + 2] && r_index - 1 >= 0
+              sq.possible_moves << board[r_index - 1][index + 2]
             end
-          end
-          if board[r_index - 2]
             # Checking if we can move bottom.
-            if board[r_index - 2][index + 1]
-            sq.possible_moves << board[r_index - 2][index + 1].position
+            if board[r_index - 2] && board[r_index - 2][index + 1] && r_index - 2 >= 0
+              sq.possible_moves << board[r_index - 2][index + 1]
             end
-            if board[r_index - 2][index - 1]
-              sq.possible_moves << board[r_index - 2][index - 1].position
+            # Here we have to make sure that both r_index and index are positive integers.
+            if board[r_index - 2] && board[r_index - 2][index - 1] && index - 1 >= 0 && r_index - 2 >= 0
+              sq.possible_moves << board[r_index - 2][index - 1]
             end
-          end
-          if row[index - 2]
             # Checking if we can move left.
             if board[r_index + 1] && board[r_index + 1][index + 2]
-            sq.possible_moves << board[r_index + 1][index + 2].position
+              sq.possible_moves << board[r_index + 1][index + 2]
             end
-            if board[r_index - 1] && board[r_index - 1][index + 2]
-              sq.possible_moves << board[r_index - 1][index + 2].position
+            if board[r_index - 1] && board[r_index - 1][index + 2] && index - 1 >= 0 && r_index - 2 >= 0
+              sq.possible_moves << board[r_index - 1][index + 2]
             end
-          end
         end
       end
     end
@@ -94,4 +89,6 @@ class Board
 end
 
 b = Board.new
-p b.board[0][0].possible_moves
+b.board[0][0].possible_moves.each do |p|
+  p p.position
+end
