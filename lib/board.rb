@@ -19,13 +19,9 @@ module Board_functions
     row
   end
 
-  def valid_position?(board[row_index][col_index])
-    if row_index >=0 && col_index >=0
-      if board[row_index]
-        if board[row_index][col_index]
-          return true
-        end
-      end
+  def valid_position?(board, row_index, col_index)
+    if row_index >=0 && col_index >=0 && board[row_index] && board[row_index][col_index]
+      return true
     end
     return false
   end
@@ -34,32 +30,32 @@ module Board_functions
     board.each_with_index do |row, row_index|
       row.each_with_index do |sq, col_index|
         # Adding possible top moves.
-        if valid_position?(board[row_index + 2][col_index + 1])
+        if valid_position?(board, row_index + 2, col_index + 1)
           sq.possible_moves << board[row_index + 2][col_index + 1]
         end
-        if valid_position?(board[row_index - 2][col_index - 1])
+        if valid_position?(board, row_index - 2, col_index - 1)
           sq.possible_moves << board[row_index - 2][col_index - 1]
         end
         # Adding possible right moves.
-        if valid_position?(board[row_index + 1][col_index + 2])
+        if valid_position?(board, row_index + 1, col_index + 2)
           sq.possible_moves << board[row_index + 1][col_index + 2]
         end
-        if valid_position?(board[row_index - 1][col_index + 2])
+        if valid_position?(board, row_index - 1, col_index + 2,)
           sq.possible_moves << board[row_index - 1][col_index + 2]
         end
         # Adding possible bottom moves.
-        if valid_position?(board[row_index _ 2][col_index + 1])
-          sq.possible_moves << board[row_index _ 2][col_index + 1]
+        if valid_position?(board, row_index - 2, col_index + 1)
+          sq.possible_moves << board[row_index - 2][col_index + 1]
         end
-        if valid_position?(board[row_index + 2][col_index - 1])
+        if valid_position?(board, row_index + 2, col_index - 1)
           sq.possible_moves << board[row_index + 2][col_index - 1]
         end
         # Adding possible left moves.
-        if valid_position?(board[row_index + 1][col_index - 2])
+        if valid_position?(board, row_index + 1, col_index - 2)
           sq.possible_moves << board[row_index + 1][col_index - 2]
         end
-        if valid_position?(board[row_index -1][col_index + 2])
-          sq.possible_moves << board[row_index -1][col_index + 2]
+        if valid_position?(board, row_index - 1, col_index - 2)
+          sq.possible_moves << board[row_index - 1][col_index - 2]
         end
       end
     end
@@ -95,7 +91,12 @@ class Board
 
   def initialize
     @board = add_sq_to_board
+    add_possible_moves(board)
   end
 end
 
+chess = Board.new
+chess.board[5][5].possible_moves.each do |e|
+  p e.position
+end
 
