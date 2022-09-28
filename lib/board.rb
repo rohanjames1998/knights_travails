@@ -19,7 +19,16 @@ module Board_functions
     row
   end
 
-
+  def valid_position?(board[row_index][col_index])
+    if row_index >=0 && col_index >=0
+      if board[row_index]
+        if board[row_index][col_index]
+          return true
+        end
+      end
+    end
+    return false
+  end
 
 class Square
   # A square is a single position on the chess board where knight can be placed.
@@ -44,11 +53,7 @@ class Board
 
   def initialize
     @board = add_sq_to_board
-    add_possible_moves(board)
   end
 end
 
-b = Board.new
-b.board[0][0].possible_moves.each do |p|
-  p p.position
-end
+
