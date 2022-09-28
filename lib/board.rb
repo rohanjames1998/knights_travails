@@ -30,6 +30,48 @@ module Board_functions
     return false
   end
 
+  def add_possible_moves(board)
+    board.each_with_index do |row, row_index|
+      row.each_with_index do |sq, col_index|
+        # Adding possible top moves.
+        if valid_position?(board[row_index + 2][col_index + 1])
+          sq.possible_moves << board[row_index + 2][col_index + 1]
+        end
+        if valid_position?(board[row_index - 2][col_index - 1])
+          sq.possible_moves << board[row_index - 2][col_index - 1]
+        end
+        # Adding possible right moves.
+        if valid_position?(board[row_index + 1][col_index + 2])
+          sq.possible_moves << board[row_index + 1][col_index + 2]
+        end
+        if valid_position?(board[row_index - 1][col_index + 2])
+          sq.possible_moves << board[row_index - 1][col_index + 2]
+        end
+        # Adding possible bottom moves.
+        if valid_position?(board[row_index _ 2][col_index + 1])
+          sq.possible_moves << board[row_index _ 2][col_index + 1]
+        end
+        if valid_position?(board[row_index + 2][col_index - 1])
+          sq.possible_moves << board[row_index + 2][col_index - 1]
+        end
+        # Adding possible left moves.
+        if valid_position?(board[row_index + 1][col_index - 2])
+          sq.possible_moves << board[row_index + 1][col_index - 2]
+        end
+        if valid_position?(board[row_index -1][col_index + 2])
+          sq.possible_moves << board[row_index -1][col_index + 2]
+        end
+      end
+    end
+  end
+end
+
+
+
+
+
+
+
 class Square
   # A square is a single position on the chess board where knight can be placed.
   # Each square contains information about its position and all possible moves that
