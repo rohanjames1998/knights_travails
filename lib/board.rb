@@ -1,6 +1,7 @@
 module Board_functions
 
   def add_sq_to_board
+    # Adding squares to board along with their position.
     row = []
     r_index = 0
     col_index = 0
@@ -97,14 +98,10 @@ class Board
     add_possible_moves(board)
   end
 
+    # This method makes accessing specific position on the board simpler.
   def [](location)
     row, column = location
     board[row][column]
   end
-end
-
-chess = Board.new
-chess[[5,5]].possible_moves.each do |e|
-  p e.position
 end
 
