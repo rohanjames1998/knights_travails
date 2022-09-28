@@ -20,6 +20,9 @@ module Board_functions
   end
 
   def valid_position?(board, row_index, col_index)
+    # Here we first check if both the index are above positive. Then we check
+    # If whether row exists on the board. Finally we check if  the square exists on the
+    # given row.
     if row_index >=0 && col_index >=0 && board[row_index] && board[row_index][col_index]
       return true
     end
@@ -93,10 +96,15 @@ class Board
     @board = add_sq_to_board
     add_possible_moves(board)
   end
+
+  def [](location)
+    row, column = location
+    board[row][column]
+  end
 end
 
 chess = Board.new
-chess.board[5][5].possible_moves.each do |e|
+chess[[5,5]].possible_moves.each do |e|
   p e.position
 end
 
