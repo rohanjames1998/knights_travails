@@ -98,12 +98,15 @@ class Board
     add_possible_moves(board)
   end
 
-    # This method makes accessing specific position on the board simpler.
+  # This method makes accessing specific position on the board simpler.
   def [](location)
     row, column = location
     board[row][column]
   end
 end
-
+# b = Board.new
+# b[[4, 3]].possible_moves.each do |p|
+#   p p.position
+# end
 
 
