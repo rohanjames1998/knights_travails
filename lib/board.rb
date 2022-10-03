@@ -3,9 +3,9 @@ module Board_functions
   def add_sq_to_board
     # Adding squares to board along with their position.
     row = []
-    r_index = 0
+    r_index = 8
     col_index = 0
-    until row.length == 8
+    until row.length == 0
       col = []
       until col.length == 8
         sq = Square.new
@@ -14,7 +14,7 @@ module Board_functions
         col << sq
       end
       row << col
-      r_index += 1
+      r_index -= 1
       col_index = 0
     end
     row
@@ -101,11 +101,11 @@ class Board
   # This method makes accessing specific position on the board simpler.
   def [](location)
     row, column = location
-    board[row][column]
+    board[8 - row][column]
   end
 end
-# b = Board.new
-# b[[4, 3]].possible_moves.each do |p|
+b = Board.new
+# b[[]].possible_moves.each do |p|
 #   p p.position
 # end
 
