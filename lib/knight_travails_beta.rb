@@ -41,7 +41,7 @@ end
 
 
 
-pp knight_travails([0,0],[5,5])
+pp knight_travails([3,3],[4,3])
 
 
 
