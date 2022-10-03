@@ -10,12 +10,14 @@ def knight_travails(start, final_position)
   queue.enqueue(start)
   while queue.read
     current_position = queue.dequeue
-    if !visited_squares[current_position]
-      board[current_position].possible_moves.each do |move|
-        if !visited_squares[move.position]
-        queue.enqueue(move.position)
-        prev_sqs[move.position] = current_position
-        if move.position == final_position
+    # Unless we have already visited the square
+    unless visited_squares[current_position]
+      board[current_position].possible_moves.each do |sq|
+        # Unless we have already found a path to the square
+        unless visited_squares[sq.position]
+        queue.enqueue(sq.position)
+        prev_sqs[sq.position] = current_position
+        if sq.position == final_position
           break
         end
       end
@@ -36,12 +38,11 @@ end
 
 # end
 
-# p knight_travails([3,3],[4,3])
+p knight_travails([4,5],[1,1])
 
 
 
 
-pp knight_travails([3,3],[4,3])
 
 
 

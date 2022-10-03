@@ -106,7 +106,7 @@ class Board
   end
 end
 b = Board.new
-b[[4,1]].possible_moves.each do |p|
+b[[3,3]].possible_moves.each do |p|
   p p.position
 end
 
