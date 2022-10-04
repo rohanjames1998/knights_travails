@@ -36,7 +36,7 @@ def knight_travails(start, final_position)
 
     puts "You made it in #{shortest_path.length - 1} moves! Here's your path:"
     shortest_path.each do |path|
-      puts path
+      pp path
     end
 end
 
