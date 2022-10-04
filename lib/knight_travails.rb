@@ -32,8 +32,11 @@ def knight_travails(start, final_position)
       current_sq = prev_sqs[current_sq]
     end
     shortest_path << start
-    shortest_path.reverse
-end
+    shortest_path.reverse!
 
-knight_travails([3,3],[4,3])
+    puts "You made it in #{shortest_path.length - 1} moves! Here's your path:"
+    shortest_path.each do |path|
+      puts path
+    end
+end
 
