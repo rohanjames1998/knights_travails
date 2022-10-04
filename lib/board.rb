@@ -108,9 +108,6 @@ class Board
     board[row][column]
   end
 end
-b = Board.new
-b[[3,3]].possible_moves.each do |p|
-  p p.position
-end
+
 
 
