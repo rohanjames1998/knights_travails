@@ -3,6 +3,7 @@ module Board_functions
   def add_sq_to_board
     # Adding squares to board along with their position.
     row = []
+    # In order to make 7 row index the top most and bottom row index 0 we start with 7 as our row index.
     r_index = 7
     col_index = 0
     until row.length == 8
@@ -100,6 +101,8 @@ class Board
 
   # This method makes accessing specific position on the board simpler.
   def [](location)
+    # In order to make board coordinates match normal board coordinates (i.e., 0,0 is in left bottom, and 7,7
+    # is at top-right of the board), we subtract 7 (i.e., board.length - 1) from the row coordinate given.
     row = 7 - location[0]
     column = location[1]
     board[row][column]

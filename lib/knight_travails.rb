@@ -3,44 +3,36 @@ require_relative 'queue.rb'
 
 def knight_travails(start, final_position)
   board = Board.new
-  all_paths = {}
-
-  board[start].possible_moves.each do |move|
-    sq = move.position
-  queue = Queue.new
+  prev_sqs = {}
   visited_squares = {}
-  previous_squares = {}
-  previous_squares[start] = sq
-  queue.enqueue(sq)
+  queue = Queue.new
+  queue.enqueue(start)
   while queue.read
     current_position = queue.dequeue
-    if !visited_squares[current_position]
-      visited_squares[current_position] = true
-      queue.enqueue_all_moves(board[current_position].possible_moves)
-      if board[current_position].possible_moves.include?(board[final_position])
-        previous_squares[final_position] = current_position
-        if previous_squares.length > 0 && previous_squares.length < all_paths.length
-          all_paths = previous_squares
-          previous_squares = {}
-        elsif all_paths.length == 0
-          all_paths = previous_squares
-          previous_squares = {}
+    # Unless we have already visited the square
+    unless visited_squares[current_position]
+      board[current_position].possible_moves.each do |sq|
+        # Unless we have already found a path to the square. We perform this check in order to avoid
+        # duplications and circular paths.
+        unless visited_squares[sq.position]
+        queue.enqueue(sq.position)
+        prev_sqs[sq.position] = current_position
+        if sq.position == final_position
+          break
         end
-        break
       end
-      previous_squares[queue.read] = current_position
+      end
+      visited_squares[current_position] = true
     end
   end
-end
-pp all_paths
-# shortest_path = []
-  # current_sq = final_position
-  # while current_sq != start
-  #   shortest_path << current_sq
-  #   current_sq = previous_squares[current_sq]
-  # end
-  # shortest_path << start
-  # return shortest_path.reverse
+  shortest_path = []
+    current_sq = final_position
+    until current_sq == start
+      shortest_path << current_sq
+      current_sq = prev_sqs[current_sq]
+    end
+    shortest_path << start
+    shortest_path.reverse
 end
 
 knight_travails([3,3],[4,3])
