@@ -1,5 +1,4 @@
 class Queue
-
   attr_accessor :data
 
   def initialize

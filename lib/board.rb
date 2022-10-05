@@ -1,5 +1,4 @@
 module Board_functions
-
   def add_sq_to_board
     # Adding squares to board along with their position.
     row = []
@@ -25,9 +24,10 @@ module Board_functions
     # Here we first check if both the index are above positive. Then we check
     # If whether row exists on the board. Finally we check if  the square exists on the
     # given row.
-    if row_index >=0 && col_index >=0 && board[row_index] && board[row_index][col_index]
+    if row_index >= 0 && col_index >= 0 && board[row_index] && board[row_index][col_index]
       return true
     end
+
     return false
   end
 
@@ -67,12 +67,6 @@ module Board_functions
   end
 end
 
-
-
-
-
-
-
 class Square
   # A square is a single position on the chess board where knight can be placed.
   # Each square contains information about its position and all possible moves that
@@ -108,6 +102,3 @@ class Board
     board[row][column]
   end
 end
-
-
-

@@ -15,28 +15,27 @@ def knight_travails(start, final_position)
         # Unless we have already found a path to the square. We perform this check in order to avoid
         # duplications and circular paths.
         unless visited_squares[sq.position]
-        queue.enqueue(sq.position)
-        prev_sqs[sq.position] = current_position
-        if sq.position == final_position
-          break
+          queue.enqueue(sq.position)
+          prev_sqs[sq.position] = current_position
+          if sq.position == final_position
+            break
+          end
         end
-      end
       end
       visited_squares[current_position] = true
     end
   end
   shortest_path = []
-    current_sq = final_position
-    until current_sq == start
-      shortest_path << current_sq
-      current_sq = prev_sqs[current_sq]
-    end
-    shortest_path << start
-    shortest_path.reverse!
+  current_sq = final_position
+  until current_sq == start
+    shortest_path << current_sq
+    current_sq = prev_sqs[current_sq]
+  end
+  shortest_path << start
+  shortest_path.reverse!
 
-    puts "You made it in #{shortest_path.length - 1} moves! Here's your path:"
-    shortest_path.each do |path|
-      pp path
-    end
+  puts "You made it in #{shortest_path.length - 1} moves! Here's your path:"
+  shortest_path.each do |path|
+    pp path
+  end
 end
-
